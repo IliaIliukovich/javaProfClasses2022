@@ -1,7 +1,5 @@
 package lesson12122022.streams;
 
-import lesson12122022.Cat;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
