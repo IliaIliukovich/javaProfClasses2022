@@ -1,6 +1,5 @@
 package lesson14122022.junit;
 
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,6 +23,24 @@ class NumberValidatorTest {
         assertTrue(validator.isValidAccountNumber("12340000000001"));
 
 //        Assumptions.assumeTrue(validator.isValidAccountNumber(null));
+
+    }
+
+    @Test
+    void isValidAccountNumber2() {
+
+        NumberValidator validator = new NumberValidator();
+        assertFalse(validator.regexIsValidAccountNumber(null));
+        assertFalse(validator.regexIsValidAccountNumber(""));
+        assertFalse(validator.regexIsValidAccountNumber("   "));
+        assertFalse(validator.regexIsValidAccountNumber("123qwe"));
+        assertFalse(validator.regexIsValidAccountNumber("qqq"));
+        assertFalse(validator.regexIsValidAccountNumber("1234567891234q"));
+        assertFalse(validator.regexIsValidAccountNumber("1234567891234-"));
+        assertFalse(validator.regexIsValidAccountNumber("12345@67891234"));
+        assertFalse(validator.regexIsValidAccountNumber("00000000000000"));
+        assertTrue(validator.regexIsValidAccountNumber("00000000000001"));
+        assertTrue(validator.regexIsValidAccountNumber("12340000000001"));
 
     }
 }

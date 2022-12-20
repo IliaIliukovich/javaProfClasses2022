@@ -50,7 +50,61 @@ public class RegexExamples {
             System.out.println("Match starts at " + matcher2.start() + " and ends at " + matcher2.end());
         }
 
+        // \b - cоответствует границам слов
+        String REGEX = "\\bcat\\b";
+        Pattern pattern4 = Pattern.compile(REGEX);
+        Matcher matcher4 = pattern4.matcher("cat catty cat!cat ");
+
+        while (matcher4.find()) {
+            System.out.println(matcher4.group());
+            System.out.println("Match starts at " + matcher4.start() + " and ends at " + matcher4.end());
+        }
+
+        // Методы replaceFirst и replaceAll
+        String input = "The dog says meow. " + "All dogs say meow.";
+        Pattern p = Pattern.compile("dog");
+        Matcher m = p.matcher(input);
+        System.out.println(m.replaceAll("cat"));
+
+    //Проверка IP-адреса с помощью регулярных выражений
+    //IP-адрес представляет собой строку в виде «A.B.C.D», где значение A, B, C и D может варьироваться от 0 до 255.
+    //Допускаются начальные нули. Длина A, B, C или D не может быть больше 3.
+    //
+    // ReGex to numbers from 0 to 255
+    //zeroTo255 -> (\\d{1, 2}|(0|1)\\d{2}|2[0-4]\\d|25[0-5])
+    //
+    //\d представляет цифры в регулярных выражениях, как [0–9]
+    //\\d{1, 2} перехватывает любое однозначное или двузначное число
+    //(0|1)\\d{2} перехватывает любое трехзначное число, начинающееся с 0 или 1.
+    //2[0-4]\\d улавливает числа от 200 до 249.
+    //25[0-5] ловит числа от 250 до 255.
+
+        String ip1 = "000.14.22.134";
+        System.out.println(ip1 + " is valid: " + isValidIPAddress(ip1));
+        String ip2 = "0.0.0.0";
+        System.out.println(ip2 + " is valid: " + isValidIPAddress(ip2));
+        String ip3 = "00.1.23.23.23";
+        System.out.println(ip3 + " is valid: " + isValidIPAddress(ip3));
+        String ip4 = "i.am.not.ip";
+        System.out.println(ip4 + " is valid: " + isValidIPAddress(ip4));
     }
 
+    public static boolean isValidIPAddress(String ip) {
+        if (ip == null) return false;
+
+        // Regex for digit from 0 to 255.
+        String zeroTo255
+                = "(\\d{1,2}|(0|1)\\d{2}|2[0-4]\\d|25[0-5])";
+
+        String regex = zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255 + "\\."
+                + zeroTo255;
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher m = pattern.matcher(ip);
+
+        return m.matches();
+    }
 
 }

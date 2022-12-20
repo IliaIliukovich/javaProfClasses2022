@@ -1,5 +1,8 @@
 package lesson14122022.junit;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class NumberValidator {
 //    Решение задачи:
 //    Написать метод проверки номера банковского счета public boolean isValidAccountNumber(String accountNumber)
@@ -21,6 +24,11 @@ public class NumberValidator {
             }
         }
         return numberOfZero != 14;
+    }
+
+    public boolean regexIsValidAccountNumber(String accountNumber) {
+        if (accountNumber == null) return false;
+        return Pattern.matches("(?![0]{14})([\\d]{14})", accountNumber);
     }
 
 }
