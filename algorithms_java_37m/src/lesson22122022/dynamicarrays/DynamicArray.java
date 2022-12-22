@@ -1,8 +1,9 @@
 package lesson22122022.dynamicarrays;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class DynamicArray {
+public class DynamicArray implements Iterable<Integer>{
 
     private int[] array;
     private int size;
@@ -98,8 +99,28 @@ public class DynamicArray {
         return out;
     }
 
+    public void set(int index, int element){
+        if (index >= count - 1) {
+            addAt(index, element);
+        } else {
+            array[index] = element;
+        }
+    }
+
+    public int get(int index){
+        if (index >= count - 1) throw new ArrayIndexOutOfBoundsException();
+        return array[index];
+    }
+
+    public void clear(){
+        count = 0;
+    }
+
+
     public static void main(String[] args) {
 
+//        DynamicArray<String> dynamicArray = new DynamicArray<>();
+//        DynamicArray<Object> objectDynamicArray = new DynamicArray<>();
         DynamicArray dynamicArray = new DynamicArray();
         System.out.println(Arrays.toString(dynamicArray.array));
         dynamicArray.add(1);
@@ -112,9 +133,6 @@ public class DynamicArray {
         System.out.println(Arrays.toString(dynamicArray.array));
         dynamicArray.add(5);
         System.out.println(Arrays.toString(dynamicArray.array));
-
-//        dynamicArray.addAt(2, 10);
-//        System.out.println(Arrays.toString(dynamicArray.array));
 
         dynamicArray.addAt(5, 6);
         System.out.println(Arrays.toString(dynamicArray.array));
@@ -137,8 +155,37 @@ public class DynamicArray {
         System.out.println(dynamicArray);
         System.out.println(Arrays.toString(dynamicArray.array));
 
+        dynamicArray.set(0, 10);
+        System.out.println(dynamicArray);
+        dynamicArray.set(10, 10);
+        System.out.println(dynamicArray);
+        System.out.println(dynamicArray.get(0));
+        dynamicArray.clear();
+        System.out.println(dynamicArray);
+        System.out.println(Arrays.toString(dynamicArray.array));
 
     }
 
+    public boolean contains(int data) { // todo
+        return false;
+    }
 
+    public boolean isEmpty() { // todo
+        return false;
+    }
+
+    @Override
+    public Iterator<Integer> iterator() { // todo
+        return new Iterator<Integer>() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public Integer next() {
+                return null;
+            }
+        };
+    }
 }
