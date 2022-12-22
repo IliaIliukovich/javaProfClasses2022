@@ -36,7 +36,7 @@ public class DynamicArray {
         size = array.length;
     }
 
-    private void growSize(int capacity) {
+    public void growSize(int capacity) {
         int[] newArray = new int[capacity];
         for (int i = 0; i < count; i++) {
             newArray[i] = array[i];
@@ -59,6 +59,45 @@ public class DynamicArray {
         }
     }
 
+    public void remove() {
+        if (count > 0) {
+//            array[count - 1] = 0;
+            count--;
+        }
+    }
+
+    public void removeAt(int index) {
+        if (index < count) {
+            for (int i = index; i < count - 1; i++) {
+                array[i] = array[i + 1];
+            }
+//            array[count - 1] = 0;
+            count--;
+        }
+    }
+
+    public void shrinkSize(){
+        if (count < size){
+            int[] newArray = new int[count];
+            for (int i = 0; i < count; i++) {
+                newArray[i] = array[i];
+            }
+            array = newArray;
+            size = count;
+        }
+    }
+
+    @Override
+    public String toString() {
+
+        String out = "[";
+        for (int i = 0; i < count; i++) {
+            out = out + " " + array[i];
+        }
+        out = out + "]";
+        return out;
+    }
+
     public static void main(String[] args) {
 
         DynamicArray dynamicArray = new DynamicArray();
@@ -77,10 +116,26 @@ public class DynamicArray {
 //        dynamicArray.addAt(2, 10);
 //        System.out.println(Arrays.toString(dynamicArray.array));
 
-        dynamicArray.addAt(10, 10);
+        dynamicArray.addAt(5, 6);
         System.out.println(Arrays.toString(dynamicArray.array));
         System.out.println(dynamicArray.size);
         System.out.println(dynamicArray.count);
+
+        dynamicArray.remove();
+        System.out.println(Arrays.toString(dynamicArray.array));
+        System.out.println(dynamicArray.size);
+        System.out.println(dynamicArray.count);
+
+        dynamicArray.removeAt(0);
+        System.out.println(Arrays.toString(dynamicArray.array));
+        System.out.println(dynamicArray);
+
+        dynamicArray.remove();
+        System.out.println(dynamicArray);
+        System.out.println(Arrays.toString(dynamicArray.array));
+        dynamicArray.shrinkSize();
+        System.out.println(dynamicArray);
+        System.out.println(Arrays.toString(dynamicArray.array));
 
 
     }
