@@ -48,6 +48,13 @@ public class GenericExamples {
         List<Integer> listInts = createList(1, 2);
         List<String> listStrings = createList("1", "2");
 
+//  Задание: напишите метод filter(Object[] ints, ()->()), который принимает на вход массив (любого типа)
+//  и реализацию интерфейса Filter c методом apply (Object o), чтобы убрать из массива лишнее.
+//  Проверьте как он работает на строках или других объектах.
+//  interface Filter {
+//    boolean apply(o);
+//  }
+
         String[] strings = new String[]{"One", "Two", "Three"};
         String[] filtered = filter(strings, o1 -> o1.length() == 3);
         System.out.println(Arrays.toString(filtered));
