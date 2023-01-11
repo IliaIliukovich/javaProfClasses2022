@@ -1,8 +1,11 @@
 package lesson20221221.generics;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class GenericExamples {
 
@@ -34,6 +37,7 @@ public class GenericExamples {
 //        carsInShop.add(new Volwo());
 //        carsInShop.add(new BMW());
 //        carsInShop.add(new Car());
+        Car newCar = carsInShop.get(0);
         carsInShop.forEach(System.out::println);
 
         List<? super BMW> list2 = new ArrayList<>(); // Consumer
@@ -56,12 +60,26 @@ public class GenericExamples {
 //  }
 
         String[] strings = new String[]{"One", "Two", "Three"};
-        String[] filtered = filter(strings, o1 -> o1.length() == 3);
+        String[] filtered = filter2(strings, o1 -> o1.length() == 3);
         System.out.println(Arrays.toString(filtered));
 
         Integer[] ints = new Integer[]{0, 1, 2, 3, 4, 5};
-        Integer[] filteredInts = filter(ints, i -> (i % 2 == 0));
+        Integer[] filteredInts = filter2(ints, new Predicate<Number>() {
+            @Override
+            public boolean test(Number i) {
+                return ((Integer)i % 2 == 0);
+            }
+        });
         System.out.println(Arrays.toString(filteredInts));
+
+        Integer[] newInts = (Integer[]) Array.newInstance(Integer.class, 10);
+        System.out.println(Arrays.toString(newInts));
+
+        Number someNumber = 10;
+        Class<? extends Number> aClass = someNumber.getClass();
+        System.out.println(aClass);
+        someNumber = 2.0;
+        System.out.println(someNumber.getClass());
     }
 
     public static  <T> List<T>  createList (T t1, T t2) {
@@ -70,10 +88,24 @@ public class GenericExamples {
 
     public static <T> T[] filter(T[] t, Filter<? super T> filter) {
 //        T[] filteredTs = new T[t.length]; // impossible
-//        T[] filteredTs = (T[]) new Object[t.length]; // impossible
+//        T[] filteredTs = (T[]) new Object[t.length]; // can cause exceptions!
+//        filteredTs[0] = t[0];
+//        System.out.println(filteredTs[0]);
         int size = 0;
         for (int i = 0; i < t.length; i++) {
             boolean isValid = filter.apply(t[i]);
+            if (isValid) {
+                t[size++] = t[i];
+            }
+        }
+        return Arrays.copyOf(t, size);
+    }
+
+    // same filter function with Predicate
+    public static <T> T[] filter2(T[] t, Predicate<? super T> predicate) {
+        int size = 0;
+        for (int i = 0; i < t.length; i++) {
+            boolean isValid = predicate.test(t[i]);
             if (isValid) {
                 t[size++] = t[i];
             }
