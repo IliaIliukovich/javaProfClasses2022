@@ -160,31 +160,39 @@ public class DynamicArray implements Iterable<Integer>{
         dynamicArray.set(10, 10);
         System.out.println(dynamicArray);
         System.out.println(dynamicArray.get(0));
-        dynamicArray.clear();
-        System.out.println(dynamicArray);
-        System.out.println(Arrays.toString(dynamicArray.array));
+//        dynamicArray.clear();
+//        System.out.println(dynamicArray);
+//        System.out.println(Arrays.toString(dynamicArray.array));
 
+        dynamicArray.forEach(System.out::println);
+        boolean contains5 = dynamicArray.contains(10);
+        System.out.println(contains5);
     }
 
-    public boolean contains(int data) { // todo
+    public boolean contains(int data) {
+        for (int i = 0; i < count; i++) {
+            if (data == array[i]) return true;
+        }
         return false;
     }
 
-    public boolean isEmpty() { // todo
-        return false;
+    public boolean isEmpty() {
+        return count == 0;
     }
 
     @Override
-    public Iterator<Integer> iterator() { // todo
-        return new Iterator<Integer>() {
+    public Iterator<Integer> iterator() {
+        return new Iterator<>() {
+            int i = 0;
+
             @Override
             public boolean hasNext() {
-                return false;
+                return i < count;
             }
 
             @Override
             public Integer next() {
-                return null;
+                return array[i++];
             }
         };
     }
