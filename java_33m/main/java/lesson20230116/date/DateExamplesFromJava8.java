@@ -7,7 +7,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
 import java.util.stream.Stream;
 
-public class DateExamplesFrom8 {
+public class DateExamplesFromJava8 {
 
 
     public static void main(String[] args) {
@@ -68,7 +68,7 @@ public class DateExamplesFrom8 {
     }
 
 
-    // fibonacci sequence 0 1 1 2 3 5 7
+    // fibonacci sequence 0 1 1 2 3 5 8
     private static long fibonacci(int n) {
         if (n == 0) return 0;
         if (n == 1) return 1;
