@@ -80,6 +80,8 @@ public class GenericExamples {
         System.out.println(aClass);
         someNumber = 2.0;
         System.out.println(someNumber.getClass());
+
+        MySteam<Integer> mySteam = new MySteam<Integer>().filter().filter().parallel();
     }
 
     public static  <T> List<T>  createList (T t1, T t2) {
