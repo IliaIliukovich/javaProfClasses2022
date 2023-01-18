@@ -3,6 +3,7 @@ package lesson20230116.date;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
 import java.util.stream.Stream;
@@ -64,6 +65,15 @@ public class DateExamplesFromJava8 {
 
         DateTimeFormatter formatterLocalized = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
         System.out.println(formatterLocalized.withLocale(Locale.ITALIAN).format(zonedDateTime));
+
+        LocalDate localDate = LocalDate.of(2023, 3, 1).with(TemporalAdjusters.lastInMonth(DayOfWeek.SUNDAY));
+        System.out.println(localDate);
+        Period until = LocalDate.now().until(localDate);
+//        Period.between(LocalDate.now(), localDate);
+        System.out.println(until.getMonths());
+        System.out.println(until.getDays());
+        long days = LocalDate.now().until(localDate, ChronoUnit.DAYS);
+        System.out.println(days);
 
     }
 
