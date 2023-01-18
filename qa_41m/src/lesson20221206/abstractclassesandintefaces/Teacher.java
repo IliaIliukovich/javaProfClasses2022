@@ -1,7 +1,5 @@
 package lesson20221206.abstractclassesandintefaces;
 
-import com.telran.abstractclassesandintefaces.*;
-
 import java.util.List;
 
 public class Teacher extends Human implements Teachable, Playable {

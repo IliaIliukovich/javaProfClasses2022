@@ -125,4 +125,16 @@ public class OptimalPath {
         return cacheMin[i][j];
     }
 
+    private static int findMinMemo2(int[][] pathCost, int[][] cacheMin, int i, int j) {
+        if (i >= pathCost.length || j >= pathCost[0].length) return 1000000;
+        if (cacheMin[i][j] != -1) return cacheMin[i][j];
+        if (i == pathCost.length - 1 && j == pathCost[0].length - 1) {
+            cacheMin[i][j] = pathCost[i][j];
+        } else {
+            cacheMin[i][j] = pathCost[i][j] + Math.min(findMinMemo2(pathCost, cacheMin, i + 1, j),
+                    findMinMemo2(pathCost, cacheMin, i, j + 1));
+        }
+        return cacheMin[i][j];
+    }
+
 }
