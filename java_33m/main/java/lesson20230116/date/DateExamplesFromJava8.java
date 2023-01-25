@@ -75,6 +75,17 @@ public class DateExamplesFromJava8 {
         long days = LocalDate.now().until(localDate, ChronoUnit.DAYS);
         System.out.println(days);
 
+
+        // Рейс из Лос-Анджелеса во Франкфурт отправляется в 15:05 по местному времени и длится 10 ч. 50 м.
+        // Во сколько он прилетит? Написать метод, который мог бы совершать подобные вычисления.
+        LocalDateTime departure = LocalDateTime.of(LocalDate.of(2023, 1, 1), LocalTime.of(15, 5, 0));
+        Duration flightDuration = Duration.ofHours(10).plusMinutes(50);
+        System.out.println(calculateArrivalTime(departure, flightDuration, ZoneId.of("America/Los_Angeles"), ZoneId.of("Europe/Berlin")));
+    }
+
+    public static ZonedDateTime calculateArrivalTime(LocalDateTime departure, Duration duration, ZoneId idDeparture,
+                                                     ZoneId idArrival){
+        return ZonedDateTime.of(departure, idDeparture).plus(duration).withZoneSameInstant(idArrival);
     }
 
 
