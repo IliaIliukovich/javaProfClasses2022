@@ -42,7 +42,17 @@ public class AtomicExamples {
 
         Thread t1 = new Thread(() -> {
             while (true) {
-            System.out.println(counter.incrementAndGet());
+//                System.out.println(counter.incrementAndGet());
+                // решение вместо incrementAndGet - на основе принципа compare and swap
+                boolean isUpdated = false;
+                int tmp = 0;
+                while (!isUpdated) {
+                    tmp = counter.get();
+                    int oldValue = tmp;
+                    tmp++;
+                    isUpdated = counter.compareAndSet(oldValue, tmp);
+                }
+                System.out.println(tmp);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
