@@ -4,7 +4,6 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class GenericExamples {
@@ -81,7 +80,7 @@ public class GenericExamples {
         someNumber = 2.0;
         System.out.println(someNumber.getClass());
 
-        MySteam<Integer> mySteam = new MySteam<Integer>().filter().filter().parallel();
+        MyStream<Integer> myStream = new MyStream<Integer>().filter().filter().parallel();
     }
 
     public static  <T> List<T>  createList (T t1, T t2) {
