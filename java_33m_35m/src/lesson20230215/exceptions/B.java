@@ -1,6 +1,4 @@
-package lesson20230315.exceptions;
-
-import java.io.IOException;
+package lesson20230215.exceptions;
 
 public class B extends A {
 

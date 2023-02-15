@@ -1,4 +1,4 @@
-package lesson20230315.exceptions;
+package lesson20230215.exceptions;
 
 public class InputValidationException extends Exception {
 
