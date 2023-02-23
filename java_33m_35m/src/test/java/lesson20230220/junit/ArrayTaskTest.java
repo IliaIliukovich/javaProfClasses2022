@@ -16,8 +16,8 @@ class ArrayTaskTest {
         int[] common = task.findCommon(a, b);
 //        assertTrue(Arrays.stream(common).anyMatch(value -> value == 1));
 //        assertTrue(Arrays.stream(common).anyMatch(value -> value == 7));
-        assertEquals(common[0], 1);
-        assertEquals(common[1], 7);
+        assertEquals(1, common[0]);
+        assertEquals(7, common[1]);
 
     }
 }
