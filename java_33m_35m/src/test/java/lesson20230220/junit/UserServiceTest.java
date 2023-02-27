@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,13 +30,13 @@ class UserServiceTest {
 
 
     @Test
-    void isActive() {
+    public void isActive() {
         assertTrue(service.isActive(1));
         assertFalse(service.isActive(2));
     }
 
     @Test
-    void deactivate() {
+    public void deactivate() {
         assertTrue(user1.isActive());
         service.deactivate(1);
         assertFalse(user1.isActive());
@@ -45,5 +47,13 @@ class UserServiceTest {
         Mockito.verify(repository).saveUser(user2);
 
         Mockito.verify(repository, Mockito.times(2)).saveUser(Mockito.any());
+    }
+
+    @Test
+    public void deleteInactive() {
+        service.deleteInactive(Arrays.asList(user1, user2));
+
+        Mockito.verify(repository, Mockito.times(0)).deleteUser(1);
+        Mockito.verify(repository).deleteUser(2);
     }
 }

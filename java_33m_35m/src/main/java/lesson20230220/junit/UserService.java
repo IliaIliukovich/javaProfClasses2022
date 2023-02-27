@@ -22,7 +22,11 @@ public class UserService {
     }
 
     public void deleteInactive(List<User> users){
-        // todo
+        for (User user : users) {
+            if (!user.isActive()){
+                repository.deleteUser(user.getId());
+            }
+        }
     }
 
 }
