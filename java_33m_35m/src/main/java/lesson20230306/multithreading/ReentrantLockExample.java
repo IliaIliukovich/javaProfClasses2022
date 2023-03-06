@@ -46,12 +46,12 @@ public class ReentrantLockExample {
         lock.lock();
             count++;
             System.out.println(count);
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        extracted();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            extracted();
         lock.unlock();
     }
 

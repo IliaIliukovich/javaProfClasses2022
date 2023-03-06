@@ -14,6 +14,7 @@ public class AtomicCounter {
             public void run() {
                 while (true) {
 //                    System.out.println(counter.incrementAndGet());
+                    // код ниже - фактически реализация атомарной операции incrementAndGet()
                     boolean success = false;
                     while (!success) {
                         int current = counter.get();
