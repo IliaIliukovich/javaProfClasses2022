@@ -12,7 +12,7 @@ public class BankAccount {
         sum = sum - amount;
     }
 
-    public synchronized int getSum(int amount) {
+    public synchronized int getSum() {
         return sum;
     }
 
