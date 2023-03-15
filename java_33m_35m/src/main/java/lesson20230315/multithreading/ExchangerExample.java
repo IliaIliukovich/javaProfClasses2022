@@ -48,6 +48,7 @@ public class ExchangerExample {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println(Thread.currentThread().getName() + " finished book: " + book);
 
         }
     }
@@ -55,7 +56,7 @@ public class ExchangerExample {
     public static void main(String[] args) {
         Exchanger<String> exchanger = new Exchanger<>();
         BookFan bookFan1 = new BookFan("Harry Potter", exchanger);
-        BookFan bookFan2 = new BookFan("Tom Soyer", exchanger);
+        BookFan bookFan2 = new BookFan("Tom Sawyer", exchanger);
         new Thread(bookFan1).start();
         new Thread(bookFan2).start();
     }

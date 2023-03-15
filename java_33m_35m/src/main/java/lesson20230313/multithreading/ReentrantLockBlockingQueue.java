@@ -3,12 +3,13 @@ package lesson20230313.multithreading;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ReentrantLockBlockingQueue<T> {
 
     private Queue<T> queue = new LinkedList<>();
-    private ReentrantLock lock = new ReentrantLock(true);
+    private Lock lock = new ReentrantLock(true);
     private Condition condition = lock.newCondition();
 
 

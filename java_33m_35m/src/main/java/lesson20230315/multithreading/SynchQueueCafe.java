@@ -2,17 +2,17 @@ package lesson20230315.multithreading;
 
 import java.util.concurrent.SynchronousQueue;
 
-public class SyncQueueCafe {
+public class SynchQueueCafe {
 
     static SynchronousQueue<String> order = new SynchronousQueue<>(true);
     static SynchronousQueue<String> food = new SynchronousQueue<>(true);
 
     static class Visitor implements Runnable{
 
-        String wishEat;
+        String wishToEat;
 
-        public Visitor(String wishEat) {
-            this.wishEat = wishEat;
+        public Visitor(String wishToEat) {
+            this.wishToEat = wishToEat;
         }
 
         @Override
@@ -20,10 +20,10 @@ public class SyncQueueCafe {
             System.out.println(Thread.currentThread().getName() + ": coming in");
             try {
                 System.out.println(Thread.currentThread().getName() + ": giving order");
-                order.put(wishEat);
+                order.put(wishToEat);
                 System.out.println(Thread.currentThread().getName() + ": waiting for lunch");
                 String foodForVisitor = food.take();
-                System.out.println(Thread.currentThread().getName() + ": eats: " + foodForVisitor);
+                System.out.println(Thread.currentThread().getName() + ": eating " + foodForVisitor);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -60,9 +60,9 @@ public class SyncQueueCafe {
             e.printStackTrace();
         }
 
-        new Thread(new Visitor("pizza"), "Vasua").start();
-        new Thread(new Visitor("pasta"), "Petua").start();
-        new Thread(new Visitor("cheessecake"), "Masha").start();
+        new Thread(new Visitor("pizza"), "Vasya").start();
+        new Thread(new Visitor("pasta"), "Petya").start();
+        new Thread(new Visitor("cheesecake"), "Masha").start();
     }
 
 

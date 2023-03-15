@@ -8,9 +8,8 @@ import java.util.concurrent.CyclicBarrier;
 public class Runners {
 
     static CountDownLatch latch = new CountDownLatch(3);
-    static CyclicBarrier barrier = new CyclicBarrier(3, () -> System.out.println(Thread.currentThread().getName() +
-            " The winner " +
-            "is ..."));
+    static CyclicBarrier barrier = new CyclicBarrier(3,
+            () -> System.out.println(Thread.currentThread().getName() + " The winner is ..."));
     static Random random = new Random();
 
     static class Runner implements Runnable {
@@ -32,7 +31,7 @@ public class Runners {
             System.out.println(Thread.currentThread().getName() + ": Going home");
             } catch (InterruptedException | BrokenBarrierException e) {
                 e.printStackTrace();
-                barrier.reset();
+//                barrier.reset();
             }
         }
     }
@@ -42,10 +41,8 @@ public class Runners {
 
         Thread thread = new Thread(new Runner(), "Runner1");
         thread.start();
-        Thread thread1 = new Thread(new Runner(), "Runner2");
-        thread1.start();
-        Thread thread2 = new Thread(new Runner(), "Runner3");
-        thread2.start();
+        new Thread(new Runner(), "Runner2").start();
+        new Thread(new Runner(), "Runner3").start();
         new Thread(new Runner(), "Runner4").start();
         new Thread(new Runner(), "Runner5").start();
         new Thread(new Runner(), "Runner6").start();
@@ -67,18 +64,12 @@ public class Runners {
             latch.countDown();
 
 
-            Thread.sleep(10000);
-            thread.interrupt();
-//            thread1.interrupt();
-//            thread2.interrupt();
+//            Thread.sleep(10000);
+//            thread.interrupt();
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
 
 }
