@@ -1,11 +1,16 @@
 package lesson20230310;
 
-public class Cat {
+public class Cat implements Playable{
 
     String name;
 
     public Cat(String name) {
         this.name = name;
+    }
+
+    @Override
+    public void play() {
+        System.out.println("Cat plays with a ball");
     }
 
     public class Kitten {
@@ -32,7 +37,15 @@ public class Cat {
         Kitten kitten5 = cat2.new Kitten("Marusia");
         Kitten kitten6 = cat2.new Kitten("Petya");
 
+        cat1.defaultMethod();
 
+
+
+    }
+
+    @Override
+    public void defaultMethod(){
+        System.out.println("This is default method in class cat");
     }
 
 

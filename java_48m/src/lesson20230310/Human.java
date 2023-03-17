@@ -1,6 +1,6 @@
 package lesson20230310;
 
-public abstract class Human {
+public abstract class Human implements Playable{
 
     private String name;
     private int id;
@@ -30,5 +30,10 @@ public abstract class Human {
 
     public void sayHello() {
         System.out.println("Hello!");
+    }
+
+    @Override
+    public void play(){
+        System.out.println("Human " + this.getName() + " plays");
     }
 }

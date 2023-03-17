@@ -23,4 +23,10 @@ public class Teacher extends Human{
     public void teach(Student student) {
         System.out.println("Teacher " + this.getName() + " teaches " + student.getName());
     }
+
+    public void teach(Student[] students) {
+        for (Student s : students) {
+            this.teach(s);
+        }
+    }
 }

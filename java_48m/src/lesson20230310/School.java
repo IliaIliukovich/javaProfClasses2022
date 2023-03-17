@@ -14,6 +14,15 @@ public class School {
 
         teacher.teach(student);
 
+        Cat cat = new Cat("Tom");
+
+        restTime(teacher, student, cat);
+    }
+
+    private static void restTime(Playable ... players) {
+        for (Playable p : players) {
+            p.play();
+        }
     }
 
 
