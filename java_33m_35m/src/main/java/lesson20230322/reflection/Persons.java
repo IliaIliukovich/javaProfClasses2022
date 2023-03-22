@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 public class Persons {
 
-    // пример использования самописной аннотации  @MyName для инициализации полей в класе
+    // пример использования самописной аннотации  @MyName для инициализации полей в классе
 
 
     @MyName(value = "Tom", count = 5)
