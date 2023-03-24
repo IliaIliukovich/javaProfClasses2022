@@ -1,11 +1,13 @@
 package lesson20230310;
 
+import java.util.List;
+
 public class Teacher extends Human{
 
-    private String subject;
+    private Subject subject;
+// enum Subject -
 
-
-    public Teacher(String name, int id, String subject) {
+    public Teacher(String name, int id, Subject subject) {
         super(name, id);
         this.subject = subject;
     }
@@ -21,7 +23,13 @@ public class Teacher extends Human{
     }
 
     public void teach(Student student) {
-        System.out.println("Teacher " + this.getName() + " teaches " + student.getName());
+        System.out.println("Teacher " + this.getName() + " teaches " + student.getName()
+                + ". Subject: " + subject);
+
+        List<Subject> studiedSubjects = student.getStudiedSubjects();
+        if (!studiedSubjects.contains(subject)) {
+            studiedSubjects.add(subject);
+        }
     }
 
     public void teach(Student[] students) {

@@ -33,6 +33,11 @@ public abstract class Human implements Playable{
     }
 
     @Override
+    public String toString() {
+        return "Human{" + "name='" + name + '\'' + ", id=" + id + '}';
+    }
+
+    @Override
     public void play(){
         System.out.println("Human " + this.getName() + " plays");
     }
