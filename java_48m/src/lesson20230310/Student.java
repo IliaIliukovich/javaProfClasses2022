@@ -1,8 +1,6 @@
 package lesson20230310;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 
 public class Student extends Human{
@@ -10,9 +8,9 @@ public class Student extends Human{
     private int classNumber;
 
     // список уже пройденных предметов
-    private List<Subject> studiedSubjects = new ArrayList<>();
+    private Set<Subject> studiedSubjects = EnumSet.noneOf(Subject.class);
 
-    public List<Subject> getStudiedSubjects() {
+    public Set <Subject> getStudiedSubjects() {
 //        List<Subject> copy = new ArrayList<>();
 //        copy.addAll(studiedSubjects);
 //        return copy;

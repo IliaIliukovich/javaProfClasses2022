@@ -1,6 +1,7 @@
 package lesson20230310;
 
 import java.util.List;
+import java.util.Set;
 
 public class Teacher extends Human{
 
@@ -26,10 +27,8 @@ public class Teacher extends Human{
         System.out.println("Teacher " + this.getName() + " teaches " + student.getName()
                 + ". Subject: " + subject);
 
-        List<Subject> studiedSubjects = student.getStudiedSubjects();
-        if (!studiedSubjects.contains(subject)) {
-            studiedSubjects.add(subject);
-        }
+        Set<Subject> studiedSubjects = student.getStudiedSubjects();
+        studiedSubjects.add(subject);
     }
 
     public void teach(Student[] students) {
