@@ -34,11 +34,11 @@ public class CityDAO implements WorldDAO<City> {
     }
 
     private static City getCity(ResultSet resultSet) throws SQLException {
-        City city = new City(resultSet.getInt(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getString(4),
-                resultSet.getInt(5));
+        City city = new City(resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("countrycode"),
+                resultSet.getString("district"),
+                resultSet.getInt("population"));
         return city;
     }
 
@@ -91,6 +91,35 @@ public class CityDAO implements WorldDAO<City> {
             statement.setInt(4, city.getPopulation());
             int result = statement.executeUpdate();
             System.out.println("Result: " + result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void saveSpecialCity() {
+        try (Connection connection = ConnectorDB.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SAVE_CITY);
+        ){
+            connection.setAutoCommit(false);
+            statement.setString(1, "New city");
+            statement.setString(2, "USA");
+            statement.setString(3, "-");
+            statement.setInt(4, 10_000);
+            int result = statement.executeUpdate();
+            System.out.println("Result: " + result);
+
+            Savepoint savepoint = connection.setSavepoint("A");
+
+            statement.setString(1, "New city 2");
+            statement.setString(2, "USA");
+            statement.setString(3, "-");
+            statement.setInt(4, 20_000);
+            result = statement.executeUpdate();
+            System.out.println("Result: " + result);
+
+            connection.rollback(savepoint);
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
