@@ -6,7 +6,7 @@ public class RecursiveAlgorithmsExamples {
 
         f(5);
 
-        System.out.println("Sum = " + sumNumbersRecurcive(5));
+        System.out.println("Sum = " + sumNumbersRecursive(5));
 
         System.out.println("Sum = " + sumNumbersInLoop(5));
 
@@ -31,9 +31,9 @@ public class RecursiveAlgorithmsExamples {
         f(i);
     }
 
-    public static int sumNumbersRecurcive(int i) {
+    public static int sumNumbersRecursive(int i) {
         if (i == 1) return 1; // base condition
-        int result = i + sumNumbersRecurcive(i - 1);
+        int result = i + sumNumbersRecursive(i - 1);
         return result;
     }
 
