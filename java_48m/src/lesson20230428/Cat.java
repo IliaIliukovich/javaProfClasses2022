@@ -1,4 +1,4 @@
-package lesson20230428.streams;
+package lesson20230428;
 
 public class Cat {
 

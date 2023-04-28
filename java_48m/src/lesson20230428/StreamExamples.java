@@ -1,4 +1,4 @@
-package lesson20230428.streams;
+package lesson20230428;
 
 import java.util.Arrays;
 import java.util.Collection;
