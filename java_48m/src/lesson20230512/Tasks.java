@@ -3,6 +3,9 @@ package lesson20230512;
 import lesson20230428.Cat;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Tasks {
 
@@ -16,13 +19,20 @@ public class Tasks {
         Cat cat5 = new Cat("Bob", 2, "black", true);
         List<Cat> catList = Arrays.asList(cat1, cat2, cat3, cat4, cat5);
         feed(catList);
+        feedWithStream(catList);
 
         // task 2
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         int sum = getSum(integers);
+        int sum2 = getSumWithStream(integers);
 
         // task 3
         Map<Boolean, List<Integer>> map = getMap();
+        System.out.println(map);
+        Map<Boolean, List<Integer>> map2 = getMapWithStream();
+        System.out.println(map2);
+        Map<Boolean, List<Integer>> map3 = getMapWithStream();
+        System.out.println(map3);
 
 
     }
@@ -35,6 +45,10 @@ public class Tasks {
         }
     }
 
+    private static void feedWithStream(List<Cat> catList) {
+        catList.stream().filter(Cat::isHungry).forEach(cat -> cat.setHungry(false));
+    }
+
     private static int getSum(List<Integer> integers) {
         int oddSum = 0;
         for(Integer i: integers) {
@@ -45,6 +59,11 @@ public class Tasks {
         return oddSum;
     }
 
+    private static int getSumWithStream(List<Integer> integers) {
+//        integers.stream().filter(integer -> integer % 2 == 0).reduce(Integer::sum);
+        return integers.stream().mapToInt(value -> value).filter(value -> value % 2 == 0).sum();
+    }
+
     private static Map<Boolean, List<Integer>> getMap() {
         Map<Boolean, List<Integer>> map = new TreeMap<>();
         for (int i = 0; i < 100; i++) {
@@ -53,17 +72,30 @@ public class Tasks {
                     map.get(true).add(i);
                 } else {
                     map.put(true, new ArrayList<>());
+                    map.get(true).add(i);
                 }
             } else {
                 if (map.containsKey(false)) {
                     map.get(false).add(i);
                 } else {
                     map.put(false, new ArrayList<>());
+                    map.get(false).add(i);
                 }
             }
         }
         return map;
     }
+
+    private static Map<Boolean, List<Integer>> getMapWithStream() {
+        return IntStream.range(0, 100).boxed().collect(Collectors.groupingBy(integer -> integer % 3 == 0,
+                Collectors.mapping(t -> t, Collectors.toList())));
+    }
+
+    private static Map<Boolean, List<Integer>> getMapWithStream2() {
+        return IntStream.range(0,100).boxed().collect(Collectors.partitioningBy(el -> (el % 3 == 0), Collectors.toList()));
+    }
+
+
 
 
 

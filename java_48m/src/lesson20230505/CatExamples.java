@@ -4,6 +4,9 @@ import lesson20230428.Cat;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CatExamples {
 
@@ -22,9 +25,18 @@ public class CatExamples {
         System.out.println(white);
 
         // 1. Получить Map<String, Boolean> имя / информация, голодна ли кошка
+        Map<String, Boolean> map = catList.stream().collect(Collectors.toMap(Cat::getName, Cat::isHungry));
+        System.out.println(map);
         // 2. Получить Map<String, Long> цвет / количество кошек данного цвета
+        Map<String, Long> map1 = catList.stream().collect(Collectors.groupingBy(Cat::getColour, Collectors.counting()));
+        Map<String, Long> map2 = catList.stream().collect(Collectors.toMap(Cat::getColour, cat -> 1L, Long::sum));
+        System.out.println(map1);
         // 3. Получить Map<String, Set<String>> цвет / список имен кошек данного цвета
+        Map<String, Set<String>> map3 = catList.stream().collect(Collectors.groupingBy(Cat::getColour, Collectors.mapping(Cat::getName, Collectors.toSet())));
+        System.out.println(map3);
         // 4. Получить Map<Integer, Integer> возраст / количество голодных кошек данного возраста
+        Map<Integer, Integer> map4 = catList.stream().collect(Collectors.toMap(Cat::getAge, cat -> cat.isHungry() ? 1 : 0, Integer::sum));
+        System.out.println(map4);
 
 
     }
