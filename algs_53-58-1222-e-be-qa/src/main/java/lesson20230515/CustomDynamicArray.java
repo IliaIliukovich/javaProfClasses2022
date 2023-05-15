@@ -23,11 +23,30 @@ public class CustomDynamicArray {
     }
 
     public void add(int data){
-        if (count > size - 1){
+        if (count >= size){
             growSize();
         }
         array[count++] = data;
     }
+
+    public void set(int data, int index) {
+        if (index >= count) throw new ArrayIndexOutOfBoundsException();
+        array[index] = data;
+    }
+
+    public void addAt(int data, int index){
+        if (index >= count) throw new ArrayIndexOutOfBoundsException();
+        if (count >= size) {
+            growSize();
+        }
+        for (int i = count - 1; i >= index; i--) {
+            array[i + 1] = array[i];
+        }
+        array[index] = data;
+        count++;
+    }
+
+
 
     private void growSize() {
         int[] newArray = new int[size * 2];
@@ -41,27 +60,41 @@ public class CustomDynamicArray {
 
     public static void main(String[] args) {
         CustomDynamicArray dynamicArray = new CustomDynamicArray();
-        System.out.println(dynamicArray);
+        dynamicArray.printInnerStructure();
         dynamicArray.add(1);
-        System.out.println(dynamicArray);
+        dynamicArray.printInnerStructure();
         dynamicArray.add(2);
-        System.out.println(dynamicArray);
+        dynamicArray.printInnerStructure();
         dynamicArray.add(3);
-        System.out.println(dynamicArray);
+        dynamicArray.printInnerStructure();
         dynamicArray.add(4);
-        System.out.println(dynamicArray);
+        dynamicArray.printInnerStructure();
         dynamicArray.add(5);
-        System.out.println(dynamicArray);
+        dynamicArray.printInnerStructure();
         dynamicArray.add(6);
+        dynamicArray.printInnerStructure();
+
+        dynamicArray.addAt(100, 0);
+        dynamicArray.printInnerStructure();
+        dynamicArray.addAt(100, 6);
+        dynamicArray.printInnerStructure();
+        dynamicArray.addAt(100, 7);
+        dynamicArray.printInnerStructure();
         System.out.println(dynamicArray);
 
+    }
 
-
-
+    public void printInnerStructure() {
+        System.out.println("CustomDynamicArray{" + "array=" + Arrays.toString(array)
+                + ", size=" + size + ", count=" + count + '}');
     }
 
     @Override
     public String toString() {
-        return "CustomDynamicArray{" + "array=" + Arrays.toString(array) + ", size=" + size + ", count=" + count + '}';
+        String s = "";
+        for (int i = 0; i < count; i++) {
+            s = s + " " + array[i];
+        }
+        return "CustomDynamicArray{" + "array=" + s + ", count=" + count + '}';
     }
 }
