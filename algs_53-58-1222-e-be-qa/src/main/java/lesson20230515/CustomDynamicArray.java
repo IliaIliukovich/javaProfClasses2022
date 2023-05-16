@@ -1,8 +1,9 @@
 package lesson20230515;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class CustomDynamicArray {
+public class CustomDynamicArray implements Iterable<Integer> {
 
     private int[] array;
 
@@ -46,6 +47,50 @@ public class CustomDynamicArray {
         count++;
     }
 
+    public void remove(){
+        if (count == 0) throw new RuntimeException("No elements present");
+        count--;
+    }
+
+    public void removeAt(int index) {
+        if (index >= count) throw new ArrayIndexOutOfBoundsException();
+        for (int i = index; i < count - 1; i++) {
+            array[i] = array[i + 1];
+        }
+        count--;
+    }
+
+    public void shrinkSize(){
+        if (count < size){
+            int[] newArray = new int[count];
+            for (int i = 0; i < count; i++) {
+                newArray[i] = array[i];
+            }
+            array = newArray;
+            size = count;
+        }
+    }
+
+    public int get(int index){
+        if (index >= count) throw new ArrayIndexOutOfBoundsException();
+        return array[index];
+    }
+
+    public void clear(){
+        count = 0;
+    }
+
+    public boolean contains(int element){
+        for (int i = 0; i < count; i++) {
+            if (element == array[i]) return true;
+        }
+        return false;
+    }
+
+    public boolean isEmpty(){
+        return count  == 0;
+    }
+
 
 
     private void growSize() {
@@ -60,6 +105,10 @@ public class CustomDynamicArray {
 
     public static void main(String[] args) {
         CustomDynamicArray dynamicArray = new CustomDynamicArray();
+
+        // Parametrisation of the class is also possible here
+        // CustomDynamicArray<String> dynamicArray2 = new CustomDynamicArray<>();
+
         dynamicArray.printInnerStructure();
         dynamicArray.add(1);
         dynamicArray.printInnerStructure();
@@ -81,11 +130,10 @@ public class CustomDynamicArray {
         dynamicArray.addAt(100, 7);
         dynamicArray.printInnerStructure();
         System.out.println(dynamicArray);
-
     }
 
     public void printInnerStructure() {
-        System.out.println("CustomDynamicArray{" + "array=" + Arrays.toString(array)
+        System.out.println("Inner structure: {" + "array=" + Arrays.toString(array)
                 + ", size=" + size + ", count=" + count + '}');
     }
 
@@ -96,5 +144,10 @@ public class CustomDynamicArray {
             s = s + " " + array[i];
         }
         return "CustomDynamicArray{" + "array=" + s + ", count=" + count + '}';
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        return null; // TODO
     }
 }
