@@ -22,12 +22,13 @@ public class ReadWriteFileExample {
 //            }
 //        } catch (IOException e) {
 //            e.printStackTrace();
-//        }
-//        if (bufferedReader != null){
-//            try {
-//                bufferedReader.close();
-//            } catch (IOException e) {
-//                e.printStackTrace();
+//        } finally {
+//            if (bufferedReader != null){
+//                try {
+//                    bufferedReader.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 //            }
 //        }
 
