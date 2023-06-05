@@ -16,22 +16,22 @@ public class CustomTree {
     }
 
     public Integer find(String key) {
-        return find(root, key);
-    }
+        Node tmp = root;
 
-    public Integer find(Node node, String key) {
-        if (node == null) return null;
-        if (key.compareTo(root.key) == 0) return root.value;
-        if (key.compareTo(root.key) < 0) find(root.left, key);
-        if (key.compareTo(root.key) > 0) find(root.right, key);
-        return null;
+        while (tmp != null) {
+            int result = key.compareTo(tmp.key);
+            if (result == 0) return tmp.value;
+            if (result < 0) tmp = tmp.left;
+            if (result > 0) tmp = tmp.right;
+        }
+        return 0;
     }
 
     public void put(String key, Integer value){
         root = put(root, key, value);
     }
 
-    public Node put(Node node, String key, Integer value){
+    private Node put(Node node, String key, Integer value){
         if (node == null){
             node = new Node();
             node.key = key;
@@ -50,6 +50,15 @@ public class CustomTree {
 
     public static void main(String[] args) {
 
+        CustomTree tree = new CustomTree();
+        tree.put("Ivan", 26);
+        tree.put("Mary", 33);
+        tree.put("Peter", 11);
+
+        System.out.println(tree.find("Ivan"));
+        System.out.println(tree.find("Mary"));
+        System.out.println(tree.find("Peter"));
+        System.out.println(tree.find("Tom"));
 
 
 
