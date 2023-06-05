@@ -4,12 +4,16 @@ public class CustomTree {
 
     private Node root;
 
-
-
     private class Node {
 
         String key;
         Integer value;
+
+        public Node(String key, Integer value) {
+            this.key = key;
+            this.value = value;
+        }
+
         Node left;
         Node right;
 
@@ -24,7 +28,7 @@ public class CustomTree {
             if (result < 0) tmp = tmp.left;
             if (result > 0) tmp = tmp.right;
         }
-        return 0;
+        return null;
     }
 
     public void put(String key, Integer value){
@@ -32,19 +36,10 @@ public class CustomTree {
     }
 
     private Node put(Node node, String key, Integer value){
-        if (node == null){
-            node = new Node();
-            node.key = key;
-            node.value = value;
-            return node;
-        }
+        if (node == null) return new Node(key, value);
         if (key.compareTo(node.key) == 0) node.value = value;
-        if (key.compareTo(node.key) < 0) {
-            node.left = put(node.left, key, value);
-        }
-        if (key.compareTo(node.key) > 0) {
-            node.right = put(node.right, key, value);
-        }
+        if (key.compareTo(node.key) < 0) node.left = put(node.left, key, value);
+        if (key.compareTo(node.key) > 0) node.right = put(node.right, key, value);
         return node;
     }
 
@@ -60,9 +55,13 @@ public class CustomTree {
         System.out.println(tree.find("Peter"));
         System.out.println(tree.find("Tom"));
 
+        tree.put("Peter", 50);
+        System.out.println(tree.find("Peter"));
 
+    }
 
-
+    public Integer getMin(){
+        return null;
     }
 
 
