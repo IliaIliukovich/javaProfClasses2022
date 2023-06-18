@@ -2,7 +2,7 @@ package lesson20230612;
 
 import java.util.*;
 
-public class OptimaJobTask {
+public class OptimalJobTask {
 
     static class Task {
         Integer deadline;
@@ -22,9 +22,7 @@ public class OptimaJobTask {
     public static void printOptimalTaskList(List<Task> tasks) {
         List<Task> optimalTaskList = new ArrayList<>();
         tasks.sort((o1, o2) -> o2.cost - o1.cost);
-        System.out.println(tasks);
         int lastDay = tasks.stream().map(task -> task.deadline).reduce(0, Math::max);
-        System.out.println(lastDay);
         boolean[] isNotFree = new boolean[lastDay];
         for (Task t : tasks) {
             for (int i = t.deadline - 1; i >= 0 ; i--) {
