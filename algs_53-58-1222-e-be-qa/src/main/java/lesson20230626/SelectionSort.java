@@ -7,7 +7,7 @@ import java.util.Random;
 public class SelectionSort {
 
 
-    private static void selectionSort(Comparable[] array) {
+    public static void selectionSort(Comparable[] array) {
         for (int i = 0; i < array.length; i++) {
             int indMin = i;
             for (int j = i + 1; j < array.length; j++) {

@@ -55,9 +55,34 @@ public class QuickSort {
 
     public static void main(String[] args) {
         Integer[] ints = {5, 2, 0, 4, 5};
-        quickSort(ints);
-        System.out.println(Arrays.toString(ints));
+//        quickSort(ints);
+//        System.out.println(Arrays.toString(ints));
+        System.out.println(findSmallestBruteForce(ints, 4));
+        System.out.println(findSmallest(ints, 4));
     }
+
+
+    public static Comparable findSmallestBruteForce(Comparable[] array, int k){
+        quickSort(array);
+        return array[k];
+    }
+
+    public static Comparable findSmallest(Comparable[] array, int k){
+        shuffle(array);
+        return findSmallest(array, 0, array.length - 1, k);
+    }
+
+    private static Comparable findSmallest(Comparable[] array, int start, int end, int k) {
+        if (start >= end) return array[start];
+
+        int j = split(array, start, end);
+        if (j == k) return array[k];
+        else if (k < j) return findSmallest(array, start, j - 1, k);
+        else return findSmallest(array, j + 1, end, k);
+    }
+
+
+
 
 
 
