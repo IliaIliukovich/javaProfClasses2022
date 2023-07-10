@@ -7,14 +7,14 @@ public class FindIfSumIsPresent {
         System.out.println(findIfSumIsPresent(input, 3));
     }
 
-    private static boolean findIfSumIsPresent(int[] input, int k) {
+    public static boolean findIfSumIsPresent(int[] input, int sumToTest) {
         int i = 0;
         int j = input.length - 1;
 
         while (i < j){
-            if (input[i] + input[j] < k){
+            if (input[i] + input[j] < sumToTest){
                 i++;
-            } else if ((input[i] + input[j] > k)) {
+            } else if ((input[i] + input[j] > sumToTest)) {
                 j--;
             } else {
                 return true;
