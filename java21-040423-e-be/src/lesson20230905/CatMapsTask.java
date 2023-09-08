@@ -1,9 +1,6 @@
 package lesson20230905;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CatMapsTask {
 
@@ -29,6 +26,8 @@ public class CatMapsTask {
         System.out.println(colorInfoTable);
 
 // 3. Получить Map<String, Set<String>> цвет / список имен кошек данного цвета
+        Map<String, Set<String>> colorByNameTable = task3(cats);
+        System.out.println(colorByNameTable);
 
     }
 
@@ -44,6 +43,21 @@ public class CatMapsTask {
 
     public static Map<String, Long> task2(List<Cat> cats) { // TODO
         return null;
+    }
+
+    public static Map<String, Set<String>> task3(List<Cat> cats) {
+        Map<String, Set<String>> map = new HashMap<>();
+        for (Cat cat : cats) {
+            if (map.containsKey(cat.getColor())){
+                Set<String> set = map.get(cat.getColor());
+                set.add(cat.getName());
+            } else {
+                Set<String> newSet = new HashSet<>();
+                newSet.add(cat.getName());
+                map.put(cat.getColor(), newSet);
+            }
+        }
+        return map;
     }
 
 

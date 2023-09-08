@@ -1,6 +1,6 @@
 package lesson20230905;
 
-public class Cat {
+public class Cat implements Comparable<Cat> {
 
     private String name;
     private int age;
@@ -46,27 +46,44 @@ public class Cat {
         isHungry = hungry;
     }
 
+    @Override
+    public boolean equals(Object another){
+        if (another instanceof Cat){
+            Cat anotherCat = (Cat) another;
+            if (name.equals(anotherCat.getName()) && age == anotherCat.getAge()
+                    && color.equals(anotherCat.getColor()) && isHungry == anotherCat.isHungry()) return true;
+        }
+        return false;
+    }
+
 //    @Override
 //    public boolean equals(Object another){
 //        if (another instanceof Cat){
 //            Cat anotherCat = (Cat) another;
-//            if (name.equals(anotherCat.getName()) && age == anotherCat.getAge()
-//                    && color.equals(anotherCat.getColor()) && isHungry == anotherCat.isHungry()) return true;
+//            if (name.equals(anotherCat.getName())) return true;
 //        }
 //        return false;
 //    }
 
     @Override
-    public boolean equals(Object another){
-        if (another instanceof Cat){
-            Cat anotherCat = (Cat) another;
-            if (name.equals(anotherCat.getName())) return true;
-        }
-        return false;
+    public int hashCode(){
+        return name.hashCode();
     }
 
     @Override
-    public int hashCode(){
-        return name.hashCode();
+    public int compareTo(Cat o) {
+        int result =  this.color.compareTo(o.color);   // color
+        if (result != 0) return result;
+        result = this.name.compareTo(o.name); // name
+        if (result != 0) return result;
+        result = this.age - o.age; // age
+        if (result != 0) return result;
+        result = (this.isHungry ? 1 : 0) - (o.isHungry ? 1 : 0); // isHungry
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Cat{" + "name='" + name + '\'' + ", age=" + age + ", color='" + color + '\'' + ", isHungry=" + isHungry + '}';
     }
 }
