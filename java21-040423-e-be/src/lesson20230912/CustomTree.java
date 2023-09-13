@@ -2,6 +2,7 @@ package lesson20230912;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class CustomTree {
 
@@ -57,6 +58,16 @@ public class CustomTree {
         return keys;
     }
 
+    public String getMinKey(){
+        if (root == null) return null;
+
+        Node current = root;
+        while (current.left != null){
+            current = current.left;
+        }
+        return current.key;
+    }
+
     private void inorder(List<String> keys, Node current) {
         if (current != null) {
             inorder(keys, current.left);
@@ -65,21 +76,54 @@ public class CustomTree {
         }
     }
 
+    // DFS (Depth First Search)
+    public void dfs(){
+       dfs(root);
+    }
+
+    private void dfs(Node node) {
+        if (node != null) {
+            System.out.println(node.key);
+            dfs(node.left);
+            dfs(node.right);
+        }
+    }
+
+    // BFS (Breadth First Search)
+    public void bfs(){
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            Node current = queue.poll();
+            System.out.println(current.key);
+            if (current.left != null) queue.add(current.left);
+            if (current.right != null) queue.add(current.right);
+        }
+
+    }
+
 
     public static void main(String[] args) {
         CustomTree customTree = new CustomTree();
-        customTree.put("B", 1);
-        customTree.put("A", 2);
-        customTree.put("C", 3);
-        customTree.put("F", 3);
-        customTree.put("H", 3);
-        customTree.put("S", 3);
-        System.out.println(customTree.get("B"));
+        customTree.put("C", 1);
+        customTree.put("B", 2);
+        customTree.put("D", 3);
+        customTree.put("E", 4);
+        customTree.put("G", 5);
+        customTree.put("F", 6);
+        customTree.put("A", 7);
+        System.out.println(customTree.get("F"));
+        System.out.println("Min key = " + customTree.getMinKey());
 
+        System.out.println("Inorder keys from tree:");
         Iterable<String> keys = customTree.getKeys();
         for (String k : keys) {
             System.out.println(k);
         }
+        System.out.println("DFS tree travers result:");
+        customTree.dfs();
+        System.out.println("BFS tree travers result:");
+        customTree.bfs();
 
 
     }
